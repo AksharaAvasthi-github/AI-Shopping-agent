@@ -6,22 +6,21 @@ export default function LandingPage() {
     <div className="min-h-screen bg-[#0b0b0b] text-white">
 
       {/* Navbar */}
-      <nav className="flex items-center justify-between px-8 py-6 border-b border-gray-800">
+     <nav className="flex items-center justify-between px-8 py-6 border-b border-gray-800">
 
-        <h1 className="text-3xl font-bold">
-          AI Shop
-        </h1>
+  <h1 className="text-3xl font-bold">
+    AI Shop
+  </h1>
 
-        <Link to="/app">
+  <Link to="/login">
 
-          <button className="bg-white text-black px-6 py-2 rounded-xl font-semibold">
-            Launch App
-          </button>
+    <button className="bg-white text-black px-6 py-2 rounded-xl font-semibold hover:bg-gray-200 transition">
+      Login
+    </button>
 
-        </Link>
+  </Link>
 
-      </nav>
-
+</nav>
       {/* Hero Section */}
       <div className="max-w-6xl mx-auto px-8 py-24 text-center">
 

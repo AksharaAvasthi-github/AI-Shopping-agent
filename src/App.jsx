@@ -1,4 +1,4 @@
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import { Routes, Route } from "react-router-dom";
 import LandingPage from "./pages/LandingPage.jsx";
 import TypingIndicator from "./components/TypingIndicator.jsx";
@@ -11,18 +11,28 @@ import SavedPage from "./pages/SavedPage.jsx";
 import HistoryPage from "./pages/HistoryPage.jsx";
 import CheckoutPage from "./pages/CheckoutPage.jsx";
 import ComparisonModal from "./components/ComparisonModal.jsx";
+import LoginPage from "./pages/LoginPage.jsx";
+import SignupPage from "./pages/SignupPage.jsx";
 
 export default function App() {
 
   const [input, setInput] = useState("");
   const [loading, setLoading] = useState(false);
 
-  const [messages, setMessages] = useState([
-    {
-      sender: "ai",
-      text: "Hi! What product are you looking for today?",
-    },
-  ]);
+  const [messages, setMessages] = useState(() => {
+
+  const savedMessages =
+    localStorage.getItem("chatMessages");
+
+  return savedMessages
+    ? JSON.parse(savedMessages)
+    : [
+        {
+          sender: "ai",
+          text: "Hi! What product are you looking for today?",
+        },
+      ];
+});
 
   const [products, setProducts] = useState([]);
   const [showComparison, setShowComparison] =
@@ -36,6 +46,14 @@ export default function App() {
   "Headphones",
   "Gaming",
 ];
+useEffect(() => {
+
+  localStorage.setItem(
+    "chatMessages",
+    JSON.stringify(messages)
+  );
+
+}, [messages]);
   const recognitionRef = useRef(null);
   const handleVoiceSearch = () => {
 
@@ -342,6 +360,15 @@ export default function App() {
 
     </div>
   }
+/>
+<Route
+  path="/login"
+  element={<LoginPage />}
+/>
+
+<Route
+  path="/signup"
+  element={<SignupPage />}
 />
 
   </Routes>

@@ -12,9 +12,15 @@ export default function Sidebar() {
         AI Shop
       </h1>
 
-      <button className="bg-white text-black rounded-lg py-2 px-4 mb-4">
-        + New Chat
-      </button>
+      <button
+  onClick={() => {
+    localStorage.removeItem("chatMessages");
+    window.location.reload();
+  }}
+  className="bg-white text-black rounded-lg py-2 px-4 mb-4"
+>
+  + New Chat
+</button>>
 
       <div className="flex flex-col gap-3 text-gray-300">
 
