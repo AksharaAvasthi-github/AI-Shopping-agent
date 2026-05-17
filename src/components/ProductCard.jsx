@@ -1,4 +1,9 @@
+import useCartStore from "../store/cartStore";
+
 export default function ProductCard({ product }) {
+
+  const addToCart = useCartStore((state) => state.addToCart);
+
   return (
     <div className="bg-[#1a1a1a] rounded-2xl overflow-hidden border border-gray-800">
 
@@ -24,7 +29,10 @@ export default function ProductCard({ product }) {
 
         <div className="flex gap-3">
 
-          <button className="bg-white text-black px-4 py-2 rounded-xl font-medium">
+          <button
+            onClick={() => addToCart(product)}
+            className="bg-white text-black px-4 py-2 rounded-xl font-medium"
+          >
             Add to Cart
           </button>
 

@@ -1,4 +1,9 @@
+import useCartStore from "../store/cartStore";
+
 export default function Sidebar() {
+
+  const cartItems = useCartStore((state) => state.cartItems);
+
   return (
     <div className="w-64 bg-[#171717] border-r border-gray-800 p-4 flex flex-col">
 
@@ -21,7 +26,7 @@ export default function Sidebar() {
         </button>
 
         <button className="text-left hover:text-white">
-          Cart
+          Cart ({cartItems.length})
         </button>
 
       </div>
