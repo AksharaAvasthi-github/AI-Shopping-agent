@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useRef } from "react";
 import { Routes, Route } from "react-router-dom";
 
 import Sidebar from "./components/Sidebar.jsx";
@@ -23,7 +23,50 @@ export default function App() {
   ]);
 
   const [products, setProducts] = useState([]);
+  const recognitionRef = useRef(null);
+  const handleVoiceSearch = () => {
 
+  const SpeechRecognition =
+    window.webkitSpeechRecognition;
+
+  if (!SpeechRecognition) {
+    alert("Voice search not supported in this browser");
+    return;
+  }
+
+  const recognition = new SpeechRecognition();
+
+  recognition.lang = "en-US";
+  recognition.continuous = true;
+  recognition.interimResults = true;
+
+  recognition.onresult = (event) => {
+
+    let transcript = "";
+
+    for (
+      let i = event.resultIndex;
+      i < event.results.length;
+      i++
+    ) {
+      transcript += event.results[i][0].transcript;
+    }
+
+    setInput(transcript);
+  };
+
+  recognition.onerror = (event) => {
+    console.error(event.error);
+  };
+
+  recognition.start();
+
+  recognitionRef.current = recognition;
+
+  setTimeout(() => {
+    recognition.stop();
+  }, 5000);
+};
   const handleSend = async () => {
 
     if (!input.trim()) return;
@@ -121,7 +164,7 @@ export default function App() {
       </div>
 
       {/* Input */}
-      <div className="border-t border-gray-800 p-4 flex gap-3">
+      <div className="border-t border-gray-800 p-4 flex gap-3 items-center">
 
         <input
           type="text"
@@ -135,6 +178,13 @@ export default function App() {
           }}
           className="flex-1 bg-[#1f1f1f] rounded-xl px-4 py-3 outline-none"
         />
+
+        <button
+          onClick={handleVoiceSearch}
+          className="bg-[#1f1f1f] px-4 rounded-xl"
+       >
+          🎤
+          </button>
 
         <button
           onClick={handleSend}
