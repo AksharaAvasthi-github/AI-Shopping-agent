@@ -1,5 +1,6 @@
 import { useState, useRef } from "react";
 import { Routes, Route } from "react-router-dom";
+import LandingPage from "./pages/LandingPage.jsx";
 
 import Sidebar from "./components/Sidebar.jsx";
 import ChatMessage from "./components/ChatMessage.jsx";
@@ -198,19 +199,85 @@ export default function App() {
     </div>
   );
 
-  return (
-    <div className="h-screen flex bg-[#0f0f0f]">
+ return (
+  <Routes>
 
-      <Sidebar />
+    {/* Landing Page */}
+    <Route
+      path="/"
+      element={<LandingPage />}
+    />
 
-      <Routes>
-        <Route path="/checkout" element={<CheckoutPage />} />
-        <Route path="/" element={<HomePage />} />
-        <Route path="/cart" element={<CartPage />} />
-        <Route path="/saved" element={<SavedPage />} />
-        <Route path="/history" element={<HistoryPage />} />
-      </Routes>
+    {/* Main App */}
+    <Route
+      path="/app"
+      element={
+        <div className="h-screen flex bg-[#0f0f0f]">
 
-    </div>
-  );
+          <Sidebar />
+
+          <HomePage />
+
+        </div>
+      }
+    />
+
+    {/* Cart */}
+    <Route
+      path="/cart"
+      element={
+        <div className="h-screen flex bg-[#0f0f0f]">
+
+          <Sidebar />
+
+          <CartPage />
+
+        </div>
+      }
+    />
+
+    {/* Saved */}
+    <Route
+      path="/saved"
+      element={
+        <div className="h-screen flex bg-[#0f0f0f]">
+
+          <Sidebar />
+
+          <SavedPage />
+
+        </div>
+      }
+    />
+
+    {/* History */}
+    <Route
+      path="/history"
+      element={
+        <div className="h-screen flex bg-[#0f0f0f]">
+
+          <Sidebar />
+
+          <HistoryPage />
+
+        </div>
+      }
+    />
+
+    {/* Checkout */}
+    <Route
+      path="/checkout"
+      element={
+        <div className="h-screen flex bg-[#0f0f0f]">
+
+          <Sidebar />
+
+          <CheckoutPage />
+
+        </div>
+      }
+    />
+
+  </Routes>
+);
 }
