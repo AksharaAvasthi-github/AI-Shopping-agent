@@ -1,6 +1,7 @@
 import { useState, useRef } from "react";
 import { Routes, Route } from "react-router-dom";
 import LandingPage from "./pages/LandingPage.jsx";
+import TypingIndicator from "./components/TypingIndicator.jsx";
 
 import Sidebar from "./components/Sidebar.jsx";
 import ChatMessage from "./components/ChatMessage.jsx";
@@ -142,11 +143,7 @@ export default function App() {
           />
         ))}
 
-        {loading && (
-          <div className="bg-[#1f1f1f] p-4 rounded-2xl max-w-xl">
-            Thinking...
-          </div>
-        )}
+        {loading && <TypingIndicator />}
 
         {products.length > 0 && (
 
