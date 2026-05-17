@@ -10,6 +10,7 @@ import CartPage from "./pages/CartPage.jsx";
 import SavedPage from "./pages/SavedPage.jsx";
 import HistoryPage from "./pages/HistoryPage.jsx";
 import CheckoutPage from "./pages/CheckoutPage.jsx";
+import ComparisonModal from "./components/ComparisonModal.jsx";
 
 export default function App() {
 
@@ -24,6 +25,8 @@ export default function App() {
   ]);
 
   const [products, setProducts] = useState([]);
+  const [showComparison, setShowComparison] =
+  useState(false);
   const recognitionRef = useRef(null);
   const handleVoiceSearch = () => {
 
@@ -143,6 +146,16 @@ export default function App() {
         ))}
 
         {loading && <TypingIndicator />}
+        {products.length >= 2 && (
+
+  <button
+    onClick={() => setShowComparison(true)}
+    className="bg-white text-black px-6 py-3 rounded-xl font-semibold"
+  >
+    Compare Products
+  </button>
+
+)}
 
         {products.length > 0 && (
 
@@ -159,6 +172,14 @@ export default function App() {
         )}
 
       </div>
+      {showComparison && (
+
+  <ComparisonModal
+    products={products.slice(0, 2)}
+    onClose={() => setShowComparison(false)}
+  />
+
+)}
 
       {/* Input */}
       <div className="border-t border-gray-800 p-4 flex gap-3 items-center">
