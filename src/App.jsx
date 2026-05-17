@@ -27,6 +27,15 @@ export default function App() {
   const [products, setProducts] = useState([]);
   const [showComparison, setShowComparison] =
   useState(false);
+  const [selectedCategory, setSelectedCategory] =
+  useState("All");
+  const categories = [
+  "All",
+  "Phones",
+  "Laptops",
+  "Headphones",
+  "Gaming",
+];
   const recognitionRef = useRef(null);
   const handleVoiceSearch = () => {
 
@@ -133,7 +142,25 @@ export default function App() {
       <div className="border-b border-gray-800 p-4 text-xl font-semibold">
         AI Shopping Assistant
       </div>
+    <div className="p-6 flex gap-3 flex-wrap border-b border-gray-800">
 
+  {categories.map((category) => (
+
+    <button
+      key={category}
+      onClick={() => setSelectedCategory(category)}
+      className={`px-5 py-2 rounded-xl border transition ${
+        selectedCategory === category
+          ? "bg-white text-black border-white"
+          : "bg-[#1f1f1f] text-white border-gray-700"
+      }`}
+    >
+      {category}
+    </button>
+
+  ))}
+
+</div>
       {/* Messages */}
       <div className="flex-1 overflow-y-auto p-6 space-y-4">
 
@@ -161,7 +188,17 @@ export default function App() {
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6 pt-4">
 
-            {products.map((product, index) => (
+            {products
+              .filter((product) => {
+
+                if (selectedCategory === "All")
+                  return true;
+
+                return (
+                  product.category === selectedCategory
+                );
+              })
+              .map((product, index) => (
               <ProductCard
                 key={index}
                 product={product}
