@@ -8,6 +8,7 @@ import ProductCard from "./components/ProductCard.jsx";
 import CartPage from "./pages/CartPage.jsx";
 import SavedPage from "./pages/SavedPage.jsx";
 import HistoryPage from "./pages/HistoryPage.jsx";
+import CheckoutPage from "./pages/CheckoutPage.jsx";
 
 export default function App() {
 
@@ -153,6 +154,7 @@ export default function App() {
       <Sidebar />
 
       <Routes>
+        <Route path="/checkout" element={<CheckoutPage />} />
         <Route path="/" element={<HomePage />} />
         <Route path="/cart" element={<CartPage />} />
         <Route path="/saved" element={<SavedPage />} />

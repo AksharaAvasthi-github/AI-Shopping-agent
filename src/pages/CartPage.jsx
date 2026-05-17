@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import useCartStore from "../store/cartStore";
 
 export default function CartPage() {
@@ -88,9 +89,14 @@ export default function CartPage() {
               Total: ₹{totalPrice.toLocaleString()}
             </p>
 
+            <Link to="/checkout">
+
             <button className="bg-white text-black px-6 py-3 rounded-xl font-semibold">
-              Proceed to Checkout
+                Proceed to Checkout
             </button>
+
+            </Link>
+
 
           </div>
 
