@@ -1,7 +1,11 @@
 import { useState } from "react";
 
+const N8N_WEBHOOK_URL =
+  "http://localhost:5678/webhook-test/1030f359-2168-4af0-b8ce-5f8db2ca7aa2";
+
 export default function App() {
   const [input, setInput] = useState("");
+  const [isSending, setIsSending] = useState(false);
 
   const [messages, setMessages] = useState([
     {
@@ -10,22 +14,66 @@ export default function App() {
     },
   ]);
 
-  const handleSend = () => {
+  const handleSend = async () => {
     if (!input.trim()) return;
 
+    const messageText = input;
     const userMessage = {
       sender: "user",
-      text: input,
+      text: messageText,
     };
 
-    const aiMessage = {
-      sender: "ai",
-      text: `Searching for: ${input}`,
-    };
-
-    setMessages((prev) => [...prev, userMessage, aiMessage]);
-
+    setMessages((prev) => [...prev, userMessage]);
+    setIsSending(true);
     setInput("");
+
+    try {
+      const response = await fetch(N8N_WEBHOOK_URL, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          message: messageText,
+        }),
+      });
+
+      const responseText = await response.text();
+      let replyText = responseText;
+
+      try {
+        const data = JSON.parse(responseText);
+        replyText =
+          data.output || data.reply || data.message || data.text || JSON.stringify(data);
+      } catch {
+        // Keep the raw response text when n8n does not return JSON.
+      }
+
+      if (!response.ok) {
+        throw new Error(replyText || "n8n request failed");
+      }
+
+      setMessages((prev) => [
+        ...prev,
+        {
+          sender: "ai",
+          text: replyText || "I got your request from n8n.",
+        },
+      ]);
+    } catch (error) {
+      setMessages((prev) => [
+        ...prev,
+        {
+          sender: "ai",
+          text:
+            error instanceof Error
+              ? `Could not reach n8n: ${error.message}`
+              : "Could not reach n8n.",
+        },
+      ]);
+    } finally {
+      setIsSending(false);
+    }
   };
 
   return (
@@ -95,9 +143,10 @@ export default function App() {
 
           <button
             onClick={handleSend}
+            disabled={isSending}
             className="bg-white text-black px-6 rounded-xl font-medium"
           >
-            Send
+            {isSending ? "Sending..." : "Send"}
           </button>
 
         </div>
