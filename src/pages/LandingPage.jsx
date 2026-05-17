@@ -25,7 +25,7 @@ export default function LandingPage() {
       {/* Hero Section */}
       <div className="max-w-6xl mx-auto px-8 py-24 text-center">
 
-        <h1 className="text-6xl font-bold leading-tight mb-8">
+        <h1 className="text-4xl md:text-6xl font-bold leading-tight mb-8">
 
           AI Powered <br />
 
@@ -41,7 +41,7 @@ export default function LandingPage() {
         </p>
 
         {/* Search Bar */}
-       <div className="max-w-3xl mx-auto flex items-center bg-[#171717] border border-gray-800 rounded-2xl p-2">
+       <div className="max-w-3xl mx-auto flex flex-col md:flex-row items-stretch md:items-center gap-3 bg-[#171717] border border-gray-800 rounded-2xl p-3">
 
   <input
     type="text"
@@ -51,7 +51,7 @@ export default function LandingPage() {
 
   <Link to="/app">
 
-    <button className="bg-white text-black px-8 py-4 rounded-xl font-semibold hover:bg-gray-200 transition">
+    <button className="w-full md:w-auto bg-white text-black px-8 py-4 rounded-xl font-semibold hover:bg-gray-200 transition">
       Search
     </button>
 

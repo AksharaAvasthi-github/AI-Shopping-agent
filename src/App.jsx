@@ -186,7 +186,7 @@ export default function App() {
 
         {products.length > 0 && (
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 pt-4">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 pt-4">
 
             {products
               .filter((product) => {
@@ -219,7 +219,7 @@ export default function App() {
 )}
 
       {/* Input */}
-      <div className="border-t border-gray-800 p-4 flex gap-3 items-center">
+      <div className="border-t border-gray-800 p-4 flex flex-col md:flex-row gap-3 items-stretch md:items-center">
 
         <input
           type="text"
@@ -243,7 +243,7 @@ export default function App() {
 
         <button
           onClick={handleSend}
-          className="bg-white text-black px-6 rounded-xl font-medium"
+          className="w-full md:w-auto bg-white text-black px-6 py-3 rounded-xl font-medium"
         >
           Send
         </button>
