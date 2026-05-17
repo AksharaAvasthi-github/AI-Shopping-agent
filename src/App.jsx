@@ -2,11 +2,10 @@ import { useState, useRef } from "react";
 import { Routes, Route } from "react-router-dom";
 import LandingPage from "./pages/LandingPage.jsx";
 import TypingIndicator from "./components/TypingIndicator.jsx";
-
+import SuccessPage from "./pages/SuccessPage.jsx";
 import Sidebar from "./components/Sidebar.jsx";
 import ChatMessage from "./components/ChatMessage.jsx";
 import ProductCard from "./components/ProductCard.jsx";
-
 import CartPage from "./pages/CartPage.jsx";
 import SavedPage from "./pages/SavedPage.jsx";
 import HistoryPage from "./pages/HistoryPage.jsx";
@@ -274,6 +273,18 @@ export default function App() {
         </div>
       }
     />
+    <Route
+  path="/success"
+  element={
+    <div className="h-screen flex bg-[#0f0f0f]">
+
+      <Sidebar />
+
+      <SuccessPage />
+
+    </div>
+  }
+/>
 
   </Routes>
 );

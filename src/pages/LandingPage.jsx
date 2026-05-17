@@ -41,23 +41,23 @@ export default function LandingPage() {
         </p>
 
         {/* Search Bar */}
-        <div className="max-w-3xl mx-auto flex bg-[#171717] border border-gray-800 rounded-2xl overflow-hidden">
+       <div className="max-w-3xl mx-auto flex items-center bg-[#171717] border border-gray-800 rounded-2xl p-2">
 
-          <input
-            type="text"
-            placeholder="Ask AI to find products..."
-            className="flex-1 bg-transparent px-6 py-5 outline-none text-lg"
-          />
+  <input
+    type="text"
+    placeholder="Ask AI to find products..."
+    className="flex-1 bg-transparent px-4 py-4 outline-none text-lg"
+  />
 
-          <Link to="/app">
+  <Link to="/app">
 
-            <button className="bg-white text-black px-8 font-semibold">
-              Search
-            </button>
+    <button className="bg-white text-black px-8 py-4 rounded-xl font-semibold hover:bg-gray-200 transition">
+      Search
+    </button>
 
-          </Link>
+  </Link>
 
-        </div>
+</div>
 
       </div>
 

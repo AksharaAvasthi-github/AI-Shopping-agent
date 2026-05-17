@@ -1,4 +1,5 @@
 import useCartStore from "../store/cartStore";
+import { Link } from "react-router-dom";
 
 export default function CheckoutPage() {
 
@@ -102,9 +103,13 @@ export default function CheckoutPage() {
 
           </div>
 
-          <button className="w-full bg-white text-black py-3 rounded-xl font-semibold">
+        <Link to="/success">
+
+        <button className="w-full bg-white text-black py-3 rounded-xl font-semibold">
             Place Order
-          </button>
+        </button>
+
+        </Link>
 
         </div>
 
