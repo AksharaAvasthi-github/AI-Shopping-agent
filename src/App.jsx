@@ -1,4 +1,33 @@
+import { useState } from "react";
+
 export default function App() {
+  const [input, setInput] = useState("");
+
+  const [messages, setMessages] = useState([
+    {
+      sender: "ai",
+      text: "Hi! What product are you looking for today?",
+    },
+  ]);
+
+  const handleSend = () => {
+    if (!input.trim()) return;
+
+    const userMessage = {
+      sender: "user",
+      text: input,
+    };
+
+    const aiMessage = {
+      sender: "ai",
+      text: `Searching for: ${input}`,
+    };
+
+    setMessages((prev) => [...prev, userMessage, aiMessage]);
+
+    setInput("");
+  };
+
   return (
     <div className="bg-[#0f0f0f] text-white h-screen flex">
 
@@ -8,7 +37,7 @@ export default function App() {
           AI Shop
         </h1>
 
-        <button className="bg-white text-black rounded-lg py-2 px-4 mb-4 hover:bg-gray-200 transition">
+        <button className="bg-white text-black rounded-lg py-2 px-4 mb-4">
           + New Chat
         </button>
 
@@ -27,7 +56,7 @@ export default function App() {
         </div>
       </div>
 
-      {/* Main Chat Area */}
+      {/* Main */}
       <div className="flex-1 flex flex-col">
 
         {/* Header */}
@@ -38,32 +67,42 @@ export default function App() {
         {/* Messages */}
         <div className="flex-1 overflow-y-auto p-6 space-y-4">
 
-          {/* AI Message */}
-          <div className="bg-[#1f1f1f] p-4 rounded-2xl max-w-xl">
-            Hi! What product are you looking for today?
-          </div>
-
-          {/* User Message */}
-          <div className="bg-white text-black p-4 rounded-2xl max-w-xl ml-auto">
-            Best headphones under ₹5000
-          </div>
+          {messages.map((msg, index) => (
+            <div
+              key={index}
+              className={`p-4 rounded-2xl max-w-xl ${
+                msg.sender === "user"
+                  ? "bg-white text-black ml-auto"
+                  : "bg-[#1f1f1f]"
+              }`}
+            >
+              {msg.text}
+            </div>
+          ))}
 
         </div>
 
-        {/* Input Area */}
+        {/* Input */}
         <div className="border-t border-gray-800 p-4 flex gap-3">
+
           <input
             type="text"
             placeholder="Ask for products..."
+            value={input}
+            onChange={(e) => setInput(e.target.value)}
             className="flex-1 bg-[#1f1f1f] rounded-xl px-4 py-3 outline-none"
           />
 
-          <button className="bg-white text-black px-6 rounded-xl font-medium hover:bg-gray-200 transition">
+          <button
+            onClick={handleSend}
+            className="bg-white text-black px-6 rounded-xl font-medium"
+          >
             Send
           </button>
+
         </div>
 
       </div>
     </div>
-  )
+  );
 }
