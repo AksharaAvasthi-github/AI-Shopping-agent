@@ -1,11 +1,9 @@
 import { useState } from "react";
 
-const N8N_WEBHOOK_URL =
-  "http://localhost:5678/webhook-test/1030f359-2168-4af0-b8ce-5f8db2ca7aa2";
-
 export default function App() {
+
   const [input, setInput] = useState("");
-  const [isSending, setIsSending] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   const [messages, setMessages] = useState([
     {
@@ -14,65 +12,61 @@ export default function App() {
     },
   ]);
 
+  const [products, setProducts] = useState([]);
+
   const handleSend = async () => {
+
     if (!input.trim()) return;
 
-    const messageText = input;
     const userMessage = {
       sender: "user",
-      text: messageText,
+      text: input,
     };
 
     setMessages((prev) => [...prev, userMessage]);
-    setIsSending(true);
+
+    const userInput = input;
+
     setInput("");
+    setLoading(true);
 
     try {
-      const response = await fetch(N8N_WEBHOOK_URL, {
+
+      const response = await fetch("YOUR_N8N_WEBHOOK_URL", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          message: messageText,
+          message: userInput,
         }),
       });
 
-      const responseText = await response.text();
-      let replyText = responseText;
+      const data = await response.json();
 
-      try {
-        const data = JSON.parse(responseText);
-        replyText =
-          data.output || data.reply || data.message || data.text || JSON.stringify(data);
-      } catch {
-        // Keep the raw response text when n8n does not return JSON.
-      }
+      const aiMessage = {
+        sender: "ai",
+        text: data.message || "Here are some recommendations.",
+      };
 
-      if (!response.ok) {
-        throw new Error(replyText || "n8n request failed");
-      }
+      setMessages((prev) => [...prev, aiMessage]);
 
-      setMessages((prev) => [
-        ...prev,
-        {
-          sender: "ai",
-          text: replyText || "I got your request from n8n.",
-        },
-      ]);
+      // Dynamic products from backend
+      setProducts(data.products || []);
+
+      setLoading(false);
+
     } catch (error) {
+
       setMessages((prev) => [
         ...prev,
         {
           sender: "ai",
-          text:
-            error instanceof Error
-              ? `Could not reach n8n: ${error.message}`
-              : "Could not reach n8n.",
+          text: "Error connecting to AI agent.",
         },
       ]);
-    } finally {
-      setIsSending(false);
+
+      setLoading(false);
     }
   };
 
@@ -81,6 +75,7 @@ export default function App() {
 
       {/* Sidebar */}
       <div className="w-64 bg-[#171717] border-r border-gray-800 p-4 flex flex-col">
+
         <h1 className="text-2xl font-bold mb-8">
           AI Shop
         </h1>
@@ -90,6 +85,7 @@ export default function App() {
         </button>
 
         <div className="flex flex-col gap-3 text-gray-300">
+
           <button className="text-left hover:text-white">
             Chat History
           </button>
@@ -101,7 +97,9 @@ export default function App() {
           <button className="text-left hover:text-white">
             Cart
           </button>
+
         </div>
+
       </div>
 
       {/* Main */}
@@ -128,6 +126,65 @@ export default function App() {
             </div>
           ))}
 
+          {loading && (
+            <div className="bg-[#1f1f1f] p-4 rounded-2xl max-w-xl">
+              Thinking...
+            </div>
+          )}
+
+          {/* Dynamic Product Cards */}
+          {products.length > 0 && (
+
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 pt-4">
+
+              {products.map((product, index) => (
+
+                <div
+                  key={index}
+                  className="bg-[#1a1a1a] rounded-2xl overflow-hidden border border-gray-800"
+                >
+
+                  <img
+                    src={product.image}
+                    alt={product.name}
+                    className="w-full h-52 object-cover"
+                  />
+
+                  <div className="p-4">
+
+                    <h2 className="text-xl font-semibold mb-2">
+                      {product.name}
+                    </h2>
+
+                    <p className="text-gray-300 mb-1">
+                      {product.price}
+                    </p>
+
+                    <p className="text-yellow-400 mb-4">
+                      ⭐ {product.rating}
+                    </p>
+
+                    <div className="flex gap-3">
+
+                      <button className="bg-white text-black px-4 py-2 rounded-xl font-medium">
+                        Add to Cart
+                      </button>
+
+                      <button className="border border-gray-600 px-4 py-2 rounded-xl">
+                        Buy Now
+                      </button>
+
+                    </div>
+
+                  </div>
+
+                </div>
+
+              ))}
+
+            </div>
+          )}
+
         </div>
 
         {/* Input */}
@@ -138,15 +195,19 @@ export default function App() {
             placeholder="Ask for products..."
             value={input}
             onChange={(e) => setInput(e.target.value)}
+            onKeyDown={(e) => {
+              if (e.key === "Enter") {
+                handleSend();
+              }
+            }}
             className="flex-1 bg-[#1f1f1f] rounded-xl px-4 py-3 outline-none"
           />
 
           <button
             onClick={handleSend}
-            disabled={isSending}
             className="bg-white text-black px-6 rounded-xl font-medium"
           >
-            {isSending ? "Sending..." : "Send"}
+            Send
           </button>
 
         </div>
