@@ -18,18 +18,18 @@ export default function CheckoutPage() {
   }, 0);
 
   return (
-    <div className="flex-1 bg-[#0f0f0f] text-white p-8 overflow-y-auto">
+    <div className="flex-1 overflow-y-auto bg-[var(--app-bg)] p-8 text-[var(--app-text)]">
 
-      <h1 className="text-3xl font-bold mb-8">
+      <h1 className="mb-8 text-3xl font-bold">
         Checkout
       </h1>
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
 
         {/* Shipping Form */}
-        <div className="bg-[#171717] border border-gray-800 rounded-2xl p-6">
+        <div className="rounded-[1.5rem] border border-[var(--app-border)] bg-[var(--app-surface)] p-6">
 
-          <h2 className="text-2xl font-semibold mb-6">
+          <h2 className="mb-6 text-2xl font-semibold">
             Shipping Details
           </h2>
 
@@ -38,25 +38,25 @@ export default function CheckoutPage() {
             <input
               type="text"
               placeholder="Full Name"
-              className="w-full bg-[#1f1f1f] rounded-xl px-4 py-3 outline-none"
+              className="w-full rounded-xl border border-[var(--app-border)] bg-[var(--app-surface-strong)] px-4 py-3 text-[var(--app-text)] outline-none placeholder:text-[var(--app-text-muted)]"
             />
 
             <input
               type="text"
               placeholder="Address"
-              className="w-full bg-[#1f1f1f] rounded-xl px-4 py-3 outline-none"
+              className="w-full rounded-xl border border-[var(--app-border)] bg-[var(--app-surface-strong)] px-4 py-3 text-[var(--app-text)] outline-none placeholder:text-[var(--app-text-muted)]"
             />
 
             <input
               type="text"
               placeholder="City"
-              className="w-full bg-[#1f1f1f] rounded-xl px-4 py-3 outline-none"
+              className="w-full rounded-xl border border-[var(--app-border)] bg-[var(--app-surface-strong)] px-4 py-3 text-[var(--app-text)] outline-none placeholder:text-[var(--app-text-muted)]"
             />
 
             <input
               type="text"
               placeholder="Postal Code"
-              className="w-full bg-[#1f1f1f] rounded-xl px-4 py-3 outline-none"
+              className="w-full rounded-xl border border-[var(--app-border)] bg-[var(--app-surface-strong)] px-4 py-3 text-[var(--app-text)] outline-none placeholder:text-[var(--app-text-muted)]"
             />
 
           </div>
@@ -64,9 +64,9 @@ export default function CheckoutPage() {
         </div>
 
         {/* Order Summary */}
-        <div className="bg-[#171717] border border-gray-800 rounded-2xl p-6">
+        <div className="rounded-[1.5rem] border border-[var(--app-border)] bg-[var(--app-surface)] p-6">
 
-          <h2 className="text-2xl font-semibold mb-6">
+          <h2 className="mb-6 text-2xl font-semibold">
             Order Summary
           </h2>
 
@@ -76,7 +76,7 @@ export default function CheckoutPage() {
 
               <div
                 key={index}
-                className="flex justify-between border-b border-gray-800 pb-3"
+                className="flex justify-between border-b border-[var(--app-border)] pb-3"
               >
 
                 <span>
@@ -93,7 +93,7 @@ export default function CheckoutPage() {
 
           </div>
 
-          <div className="flex justify-between text-2xl font-bold mb-6">
+          <div className="mb-6 flex justify-between text-2xl font-bold text-[var(--app-text)]">
 
             <span>Total</span>
 
@@ -105,7 +105,7 @@ export default function CheckoutPage() {
 
         <Link to="/success">
 
-        <button className="w-full bg-white text-black py-3 rounded-xl font-semibold">
+        <button className="w-full rounded-xl bg-[var(--app-primary)] py-3 font-semibold text-[var(--app-primary-contrast)] transition hover:opacity-95">
             Place Order
         </button>
 

@@ -4,85 +4,70 @@ export default function ComparisonModal({
 }) {
 
   return (
-    <div className="fixed inset-0 bg-black/70 flex items-center justify-center z-50 p-6">
-
-      <div className="bg-[#171717] border border-gray-800 rounded-3xl w-full max-w-5xl p-8 relative">
-
-        {/* Close */}
+    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 p-4 backdrop-blur-sm">
+      <div className="relative w-full max-w-6xl overflow-hidden rounded-[2rem] border border-[var(--app-border)] bg-[var(--app-surface-strong)] shadow-2xl shadow-black/40">
         <button
           onClick={onClose}
-          className="absolute top-4 right-4 text-2xl"
+          className="absolute right-4 top-4 inline-flex h-11 w-11 items-center justify-center rounded-full border border-[var(--app-border)] bg-[var(--app-primary-soft)] text-xl text-[var(--app-text-muted)] transition hover:bg-[var(--app-primary-soft-hover)] hover:text-[var(--app-text)]"
+          aria-label="Close comparison modal"
         >
           ✕
         </button>
 
-        <h1 className="text-3xl font-bold mb-8 text-white">
-          Product Comparison
-        </h1>
-
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-
-          {products.map((product, index) => (
-
-            <div
-              key={index}
-              className="bg-[#1f1f1f] rounded-2xl overflow-hidden border border-gray-700"
-            >
-
-              <img
-                src={product.image}
-                alt={product.name}
-                className="w-full h-64 object-cover"
-              />
-
-              <div className="p-6">
-
-                <h2 className="text-2xl font-bold mb-4 text-white">
-                  {product.name}
-                </h2>
-
-                <div className="space-y-3 text-gray-300">
-
-                  <p>
-                    <span className="font-semibold text-white">
-                      Price:
-                    </span>{" "}
-                    {product.price}
-                  </p>
-
-                  <p>
-                    <span className="font-semibold text-white">
-                      Rating:
-                    </span>{" "}
-                    ⭐ {product.rating}
-                  </p>
-
-                  <p>
-                    <span className="font-semibold text-white">
-                      Category:
-                    </span>{" "}
-                    Electronics
-                  </p>
-
-                  <p>
-                    <span className="font-semibold text-white">
-                      Delivery:
-                    </span>{" "}
-                    2-3 Days
-                  </p>
-
-                </div>
-
-              </div>
-
-            </div>
-
-          ))}
-
+        <div className="border-b border-[var(--app-border)] px-6 py-6 sm:px-8">
+          <p className="text-xs uppercase tracking-[0.35em] text-[var(--app-text-muted)]">
+            Product Comparison
+          </p>
+          <h1 className="mt-2 text-2xl font-semibold text-[var(--app-text)] sm:text-3xl">
+            Compare your top picks side by side
+          </h1>
         </div>
 
-      </div>
+        <div className="max-h-[80vh] overflow-y-auto p-6 sm:p-8">
+          <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
+            {products.map((product, index) => (
+              <article
+                key={index}
+                className="overflow-hidden rounded-[1.75rem] border border-[var(--app-border)] bg-[var(--app-surface)]"
+              >
+                <img
+                  src={product.image}
+                  alt={product.name}
+                  className="h-64 w-full object-cover"
+                />
 
+                <div className="p-6">
+                  <h2 className="text-2xl font-semibold text-[var(--app-text)]">
+                    {product.name}
+                  </h2>
+
+                  <div className="mt-5 space-y-4 text-sm text-[var(--app-text-muted)]">
+                    <p>
+                      <span className="font-semibold text-[var(--app-text)]">Price:</span>{" "}
+                      {product.price}
+                    </p>
+
+                    <p>
+                      <span className="font-semibold text-[var(--app-text)]">Rating:</span>{" "}
+                      ⭐ {product.rating}
+                    </p>
+
+                    <p>
+                      <span className="font-semibold text-[var(--app-text)]">Category:</span>{" "}
+                      {product.category || "Electronics"}
+                    </p>
+
+                    <p>
+                      <span className="font-semibold text-[var(--app-text)]">Delivery:</span>{" "}
+                      2-3 Days
+                    </p>
+                  </div>
+                </div>
+              </article>
+            ))}
+          </div>
+        </div>
+      </div>
     </div>
   );
 }

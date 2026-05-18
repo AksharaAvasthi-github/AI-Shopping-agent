@@ -1,1 +1,99 @@
 @import "tailwindcss";
+
+:root {
+	color-scheme: light;
+	--app-bg: #f4f6fb;
+	--app-bg-soft: #eef2f7;
+	--app-sidebar: rgba(255, 255, 255, 0.78);
+	--app-surface: rgba(255, 255, 255, 0.9);
+	--app-surface-strong: #ffffff;
+	--app-text: #101828;
+	--app-text-muted: rgba(16, 24, 40, 0.62);
+	--app-border: rgba(16, 24, 40, 0.1);
+	--app-border-strong: rgba(16, 24, 40, 0.18);
+	--app-primary: #101828;
+	--app-primary-contrast: #ffffff;
+	--app-primary-soft: rgba(16, 24, 40, 0.06);
+	--app-primary-soft-hover: rgba(16, 24, 40, 0.1);
+	--app-spotlight-a: rgba(59, 130, 246, 0.1);
+	--app-spotlight-b: rgba(16, 185, 129, 0.08);
+	--app-user-bubble-bg: #101828;
+	--app-user-bubble-text: #ffffff;
+	--app-ai-bubble-bg: #ffffff;
+	--app-ai-bubble-text: #101828;
+	--app-success: #059669;
+	--app-warning: #d97706;
+	--app-danger: #ef4444;
+}
+
+html[data-theme="dark"] {
+	color-scheme: dark;
+	--app-bg: #090909;
+	--app-bg-soft: #111111;
+	--app-sidebar: rgba(16, 16, 16, 0.96);
+	--app-surface: rgba(255, 255, 255, 0.05);
+	--app-surface-strong: rgba(255, 255, 255, 0.08);
+	--app-text: #f8fafc;
+	--app-text-muted: rgba(248, 250, 252, 0.62);
+	--app-border: rgba(255, 255, 255, 0.1);
+	--app-border-strong: rgba(255, 255, 255, 0.18);
+	--app-primary: #ffffff;
+	--app-primary-contrast: #090909;
+	--app-primary-soft: rgba(255, 255, 255, 0.05);
+	--app-primary-soft-hover: rgba(255, 255, 255, 0.1);
+	--app-spotlight-a: rgba(255, 255, 255, 0.05);
+	--app-spotlight-b: rgba(14, 165, 233, 0.07);
+	--app-user-bubble-bg: #ffffff;
+	--app-user-bubble-text: #090909;
+	--app-ai-bubble-bg: rgba(255, 255, 255, 0.05);
+	--app-ai-bubble-text: #f8fafc;
+	--app-success: #34d399;
+	--app-warning: #f59e0b;
+	--app-danger: #f87171;
+}
+
+html,
+body,
+#root {
+	min-height: 100%;
+}
+
+body {
+	margin: 0;
+	background: var(--app-bg);
+	color: var(--app-text);
+	-webkit-font-smoothing: antialiased;
+	text-rendering: optimizeLegibility;
+}
+
+* {
+	box-sizing: border-box;
+}
+
+::selection {
+	background: rgba(255, 255, 255, 0.2);
+	color: #ffffff;
+}
+
+html,
+body,
+#root {
+	min-height: 100%;
+}
+
+body {
+	margin: 0;
+	background: #090909;
+	color: #ffffff;
+	-webkit-font-smoothing: antialiased;
+	text-rendering: optimizeLegibility;
+}
+
+* {
+	box-sizing: border-box;
+}
+
+::selection {
+	background: rgba(255, 255, 255, 0.2);
+	color: #ffffff;
+}

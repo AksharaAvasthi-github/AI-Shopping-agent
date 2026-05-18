@@ -3,11 +3,11 @@ import { Link } from "react-router-dom";
 export default function SignupPage() {
 
   return (
-    <div className="min-h-screen bg-[#0f0f0f] text-white flex items-center justify-center p-6">
+    <div className="flex min-h-screen items-center justify-center bg-[var(--app-bg)] p-6 text-[var(--app-text)]">
 
-      <div className="w-full max-w-md bg-[#171717] border border-gray-800 rounded-3xl p-8">
+      <div className="w-full max-w-md rounded-[2rem] border border-[var(--app-border)] bg-[var(--app-surface)] p-8 shadow-2xl shadow-black/10">
 
-        <h1 className="text-4xl font-bold mb-8 text-center">
+        <h1 className="mb-8 text-center text-4xl font-bold">
           Create Account
         </h1>
 
@@ -16,34 +16,34 @@ export default function SignupPage() {
           <input
             type="text"
             placeholder="Full Name"
-            className="w-full bg-[#1f1f1f] rounded-xl px-4 py-4 outline-none"
+            className="w-full rounded-xl border border-[var(--app-border)] bg-[var(--app-surface-strong)] px-4 py-4 text-[var(--app-text)] outline-none placeholder:text-[var(--app-text-muted)]"
           />
 
           <input
             type="email"
             placeholder="Email"
-            className="w-full bg-[#1f1f1f] rounded-xl px-4 py-4 outline-none"
+            className="w-full rounded-xl border border-[var(--app-border)] bg-[var(--app-surface-strong)] px-4 py-4 text-[var(--app-text)] outline-none placeholder:text-[var(--app-text-muted)]"
           />
 
           <input
             type="password"
             placeholder="Password"
-            className="w-full bg-[#1f1f1f] rounded-xl px-4 py-4 outline-none"
+            className="w-full rounded-xl border border-[var(--app-border)] bg-[var(--app-surface-strong)] px-4 py-4 text-[var(--app-text)] outline-none placeholder:text-[var(--app-text-muted)]"
           />
 
-          <button className="w-full bg-white text-black py-4 rounded-xl font-semibold">
+          <button className="w-full rounded-xl bg-[var(--app-primary)] py-4 font-semibold text-[var(--app-primary-contrast)] transition hover:opacity-95">
             Sign Up
           </button>
 
         </div>
 
-        <p className="text-gray-400 text-center mt-6">
+        <p className="mt-6 text-center text-[var(--app-text-muted)]">
 
           Already have an account?{" "}
 
           <Link
             to="/login"
-            className="text-white font-semibold"
+            className="font-semibold text-[var(--app-text)]"
           >
             Login
           </Link>

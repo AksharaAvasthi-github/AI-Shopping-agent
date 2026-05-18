@@ -22,15 +22,15 @@ export default function CartPage() {
   }, 0);
 
   return (
-    <div className="flex-1 bg-[#0f0f0f] text-white p-8 overflow-y-auto">
+    <div className="flex-1 overflow-y-auto bg-[var(--app-bg)] p-8 text-[var(--app-text)]">
 
-      <h1 className="text-3xl font-bold mb-8">
+      <h1 className="mb-8 text-3xl font-bold">
         Shopping Cart
       </h1>
 
       {cartItems.length === 0 ? (
 
-        <p className="text-gray-400">
+        <p className="text-[var(--app-text-muted)]">
           Your cart is empty.
         </p>
 
@@ -42,7 +42,7 @@ export default function CartPage() {
 
             <div
               key={index}
-              className="bg-[#1a1a1a] border border-gray-800 rounded-2xl p-4 flex gap-6 items-center"
+              className="flex items-center gap-6 rounded-[1.5rem] border border-[var(--app-border)] bg-[var(--app-surface)] p-4"
             >
 
               <img
@@ -53,15 +53,15 @@ export default function CartPage() {
 
               <div className="flex-1">
 
-                <h2 className="text-2xl font-semibold mb-2">
+                <h2 className="mb-2 text-2xl font-semibold">
                   {product.name}
                 </h2>
 
-                <p className="text-gray-300 mb-2">
+                <p className="mb-2 text-[var(--app-text-muted)]">
                   {product.price}
                 </p>
 
-                <p className="text-yellow-400">
+                <p className="text-[var(--app-warning)]">
                   ⭐ {product.rating}
                 </p>
 
@@ -69,7 +69,7 @@ export default function CartPage() {
 
               <button
                 onClick={() => removeFromCart(index)}
-                className="bg-red-500 hover:bg-red-600 px-4 py-2 rounded-xl"
+                className="rounded-xl bg-[var(--app-danger)] px-4 py-2 text-white transition hover:opacity-90"
               >
                 Remove
               </button>
@@ -79,19 +79,19 @@ export default function CartPage() {
           ))}
 
           {/* Total */}
-          <div className="bg-[#171717] border border-gray-800 rounded-2xl p-6">
+          <div className="rounded-[1.5rem] border border-[var(--app-border)] bg-[var(--app-surface-strong)] p-6 shadow-lg shadow-black/5">
 
-            <h2 className="text-2xl font-bold mb-4">
+            <h2 className="mb-4 text-2xl font-bold">
               Order Summary
             </h2>
 
-            <p className="text-xl mb-6">
+            <p className="mb-6 text-xl text-[var(--app-text)]">
               Total: ₹{totalPrice.toLocaleString()}
             </p>
 
             <Link to="/checkout">
 
-            <button className="bg-white text-black px-6 py-3 rounded-xl font-semibold">
+            <button className="rounded-xl bg-[var(--app-primary)] px-6 py-3 font-semibold text-[var(--app-primary-contrast)] transition hover:opacity-95">
                 Proceed to Checkout
             </button>
 

@@ -14,3 +14,32 @@ The React Compiler is not enabled on this template because of its impact on dev 
 ## Expanding the ESLint configuration
 
 If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+
+## n8n webhook integration
+
+Create a local `.env` file with your webhook URL:
+
+```env
+VITE_N8N_WEBHOOK_URL=https://your-n8n-domain.com/webhook/ai-chat
+```
+
+The frontend sends a JSON payload with `sessionId`, `message`, `input`, `query`, `prompt`, `chatHistory`, `messages`, `timestamp`, and `pageUrl`.
+
+For the best result, have your n8n workflow return JSON like this:
+
+```json
+{
+	"message": "Here are some options for you.",
+	"products": [
+		{
+			"name": "Product name",
+			"price": "₹12,999",
+			"rating": 4.6,
+			"image": "https://...",
+			"category": "Laptops"
+		}
+	]
+}
+```
+
+The app also understands common response fields like `reply`, `response`, `text`, `output`, `answer`, or `content` if you prefer a different n8n response node format.

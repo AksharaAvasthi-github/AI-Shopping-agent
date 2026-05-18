@@ -14,7 +14,10 @@ export default defineConfig([
       reactRefresh.configs.vite,
     ],
     languageOptions: {
-      globals: globals.browser,
+      globals: {
+        ...globals.browser,
+        __N8N_WEBHOOK_URL__: "readonly",
+      },
       parserOptions: { ecmaFeatures: { jsx: true } },
     },
   },

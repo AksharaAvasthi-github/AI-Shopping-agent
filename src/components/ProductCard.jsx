@@ -3,47 +3,56 @@ import useCartStore from "../store/cartStore";
 export default function ProductCard({ product }) {
 
   const addToCart = useCartStore((state) => state.addToCart);
+  const categoryLabel = product.category || "Electronics";
 
   return (
-    <div className="bg-[#1a1a1a] rounded-2xl overflow-hidden border border-gray-800">
+    <article className="group overflow-hidden rounded-[1.75rem] border border-[var(--app-border)] bg-[var(--app-surface)] shadow-xl shadow-black/10 transition duration-300 hover:-translate-y-1 hover:border-[var(--app-border-strong)] hover:bg-[var(--app-surface-strong)]">
+      <div className="relative overflow-hidden">
+        <img
+          src={product.image}
+          alt={product.name}
+          className="h-56 w-full object-cover transition duration-500 group-hover:scale-105"
+        />
 
-      <img
-        src={product.image}
-        alt={product.name}
-        className="w-full h-52 object-cover"
-      />
+        <div className="absolute left-4 top-4 rounded-full border border-[var(--app-border)] bg-[var(--app-primary)] px-3 py-1 text-xs font-medium text-[var(--app-primary-contrast)] backdrop-blur">
+          {categoryLabel}
+        </div>
+      </div>
 
-      <div className="p-4">
+      <div className="p-5">
+        <div className="flex items-start justify-between gap-4">
+          <h2 className="text-lg font-semibold leading-6 text-[var(--app-text)]">
+            {product.name}
+          </h2>
 
-        <h2 className="text-xl font-semibold mb-2">
-          {product.name}
-        </h2>
+          <span className="shrink-0 rounded-full border border-[var(--app-border)] bg-[var(--app-primary-soft)] px-3 py-1 text-xs font-semibold text-[var(--app-text)]">
+            ⭐ {product.rating}
+          </span>
+        </div>
 
-        <p className="text-gray-300 mb-1">
-          {product.price}
-        </p>
+        <div className="mt-4 flex items-center justify-between gap-3">
+          <p className="text-2xl font-bold tracking-tight text-[var(--app-text)]">
+            {product.price}
+          </p>
 
-        <p className="text-yellow-400 mb-4">
-          ⭐ {product.rating}
-        </p>
+          <p className="text-xs uppercase tracking-[0.3em] text-[var(--app-text-muted)]">
+            Best value
+          </p>
+        </div>
 
-        <div className="flex gap-3">
-
+        <div className="mt-5 flex gap-3">
           <button
             onClick={() => addToCart(product)}
-            className="bg-white text-black px-4 py-2 rounded-xl font-medium"
+            className="flex-1 rounded-2xl bg-[var(--app-primary)] px-4 py-3 text-sm font-semibold text-[var(--app-primary-contrast)] transition hover:opacity-95"
           >
             Add to Cart
           </button>
 
-          <button className="border border-gray-600 px-4 py-2 rounded-xl">
+          <button className="rounded-2xl border border-[var(--app-border)] bg-[var(--app-primary-soft)] px-4 py-3 text-sm font-medium text-[var(--app-text)] transition hover:bg-[var(--app-primary-soft-hover)]">
             Buy Now
           </button>
-
         </div>
-
       </div>
-
-    </div>
+    </article>
   );
 }
