@@ -39,6 +39,15 @@ export default function App() {
   useState(false);
   const [selectedCategory, setSelectedCategory] =
   useState("All");
+  const [darkMode, setDarkMode] = useState(() => {
+
+  const savedTheme =
+    localStorage.getItem("darkMode");
+
+  return savedTheme
+    ? JSON.parse(savedTheme)
+    : true;
+});
   const categories = [
   "All",
   "Phones",
@@ -53,7 +62,16 @@ useEffect(() => {
     JSON.stringify(messages)
   );
 
-}, [messages]);
+}
+, [messages]);
+useEffect(() => {
+
+  localStorage.setItem(
+    "darkMode",
+    JSON.stringify(darkMode)
+  );
+
+}, [darkMode]);
   const recognitionRef = useRef(null);
   const handleVoiceSearch = () => {
 
@@ -284,9 +302,18 @@ useEffect(() => {
     <Route
       path="/app"
       element={
-        <div className="h-screen flex bg-[#0f0f0f]">
+        <div
+  className={`h-screen flex ${
+    darkMode
+      ? "bg-[#0f0f0f] text-white"
+      : "bg-gray-100 text-black"
+  }`}
+>
 
-          <Sidebar />
+          <Sidebar
+  darkMode={darkMode}
+  setDarkMode={setDarkMode}
+/>
 
           <HomePage />
 
@@ -298,9 +325,18 @@ useEffect(() => {
     <Route
       path="/cart"
       element={
-        <div className="h-screen flex bg-[#0f0f0f]">
+        <div
+  className={`h-screen flex ${
+    darkMode
+      ? "bg-[#0f0f0f] text-white"
+      : "bg-gray-100 text-black"
+  }`}
+>
 
-          <Sidebar />
+          <Sidebar
+  darkMode={darkMode}
+  setDarkMode={setDarkMode}
+/>
 
           <CartPage />
 
@@ -314,7 +350,10 @@ useEffect(() => {
       element={
         <div className="h-screen flex bg-[#0f0f0f]">
 
-          <Sidebar />
+          <Sidebar
+  darkMode={darkMode}
+  setDarkMode={setDarkMode}
+/>
 
           <SavedPage />
 
@@ -328,7 +367,10 @@ useEffect(() => {
       element={
         <div className="h-screen flex bg-[#0f0f0f]">
 
-          <Sidebar />
+          <Sidebar
+  darkMode={darkMode}
+  setDarkMode={setDarkMode}
+/>
 
           <HistoryPage />
 
@@ -342,7 +384,10 @@ useEffect(() => {
       element={
         <div className="h-screen flex bg-[#0f0f0f]">
 
-          <Sidebar />
+          <Sidebar
+  darkMode={darkMode}
+  setDarkMode={setDarkMode}
+/>
 
           <CheckoutPage />
 
@@ -354,7 +399,10 @@ useEffect(() => {
   element={
     <div className="h-screen flex bg-[#0f0f0f]">
 
-      <Sidebar />
+      <Sidebar
+  darkMode={darkMode}
+  setDarkMode={setDarkMode}
+/>
 
       <SuccessPage />
 

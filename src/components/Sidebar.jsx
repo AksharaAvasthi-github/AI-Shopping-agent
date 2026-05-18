@@ -1,9 +1,14 @@
 import { Link } from "react-router-dom";
 import useCartStore from "../store/cartStore";
 
-export default function Sidebar() {
+export default function Sidebar({
+  darkMode = true,
+  setDarkMode = () => {},
+}) {
 
-  const cartItems = useCartStore((state) => state.cartItems);
+  const cartItems = useCartStore(
+    (state) => state.cartItems
+  );
 
   return (
     <div className="hidden md:flex w-64 bg-[#171717] border-r border-gray-800 p-4 flex-col text-white">
@@ -13,14 +18,14 @@ export default function Sidebar() {
       </h1>
 
       <button
-  onClick={() => {
-    localStorage.removeItem("chatMessages");
-    window.location.reload();
-  }}
-  className="bg-white text-black rounded-lg py-2 px-4 mb-4"
->
-  + New Chat
-</button>>
+        onClick={() => {
+          localStorage.removeItem("chatMessages");
+          window.location.reload();
+        }}
+        className="bg-white text-black rounded-lg py-2 px-4 mb-4"
+      >
+        + New Chat
+      </button>
 
       <div className="flex flex-col gap-3 text-gray-300">
 
@@ -41,6 +46,13 @@ export default function Sidebar() {
         </Link>
 
       </div>
+
+      <button
+        onClick={() => setDarkMode(!darkMode)}
+        className="mt-auto bg-[#1f1f1f] py-3 rounded-xl"
+      >
+        {darkMode ? "☀ Light Mode" : "🌙 Dark Mode"}
+      </button>
 
     </div>
   );
